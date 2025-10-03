@@ -1,0 +1,185 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ANPR Dashboard Design System - All colors MUST be HSL */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    /* ANPR Dark Theme - Deep Space Colors */
+    --background: 240 15% 6%;
+    --background-secondary: 240 12% 9%;
+    --background-tertiary: 240 10% 12%;
+    --foreground: 0 0% 98%;
+    --foreground-muted: 240 5% 70%;
+
+    /* Neon Accent Colors */
+    --neon-cyan: 194 100% 50%;
+    --neon-purple: 261 54% 70%;
+    --neon-green: 150 100% 50%;
+    --neon-pink: 320 100% 70%;
+    --neon-blue: 220 100% 60%;
+
+    /* Glassmorphism */
+    --glass: 240 15% 15% / 0.1;
+    --glass-border: 240 15% 25% / 0.2;
+    --glass-hover: 240 15% 20% / 0.15;
+
+    /* Status Colors */
+    --success: 150 100% 50%;
+    --warning: 45 100% 60%;
+    --error: 0 84% 60%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--neon-cyan)) 0%, hsl(var(--neon-purple)) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(var(--neon-purple)) 0%, hsl(var(--neon-pink)) 100%);
+    --gradient-bg: linear-gradient(135deg, hsl(240 15% 6%) 0%, hsl(240 12% 8%) 50%, hsl(240 18% 4%) 100%);
+    --gradient-glass: linear-gradient(135deg, hsl(var(--glass)) 0%, hsl(240 15% 20% / 0.05) 100%);
+
+    /* Shadows & Glows */
+    --shadow-glass: 0 8px 32px 0 hsl(240 15% 0% / 0.37);
+    --glow-cyan: 0 0 20px hsl(var(--neon-cyan) / 0.5);
+    --glow-purple: 0 0 20px hsl(var(--neon-purple) / 0.5);
+    --glow-success: 0 0 20px hsl(var(--success) / 0.5);
+    --glow-error: 0 0 20px hsl(var(--error) / 0.5);
+
+    /* Design System Tokens */
+    --primary: var(--neon-cyan);
+    --primary-foreground: 240 15% 6%;
+    --secondary: var(--background-secondary);
+    --secondary-foreground: var(--foreground);
+    --accent: var(--neon-purple);
+    --accent-foreground: var(--foreground);
+    --muted: var(--background-tertiary);
+    --muted-foreground: var(--foreground-muted);
+    --destructive: var(--error);
+    --destructive-foreground: var(--foreground);
+    --border: var(--glass-border);
+    --input: var(--glass-border);
+    --ring: var(--neon-cyan);
+    --card: var(--glass);
+    --card-foreground: var(--foreground);
+    --popover: var(--background-secondary);
+    --popover-foreground: var(--foreground);
+
+    --radius: 0.75rem;
+  }
+
+  /* Light theme overrides */
+  .light {
+    --background: 0 0% 98%;
+    --background-secondary: 0 0% 95%;
+    --background-tertiary: 0 0% 92%;
+    --foreground: 240 15% 6%;
+    --foreground-muted: 240 5% 30%;
+    --glass: 0 0% 100% / 0.7;
+    --glass-border: 240 15% 85% / 0.3;
+    --glass-hover: 0 0% 100% / 0.9;
+  }
+
+  /* Animations & Effects */
+  @keyframes glow-pulse {
+    0%, 100% { 
+      filter: drop-shadow(var(--glow-cyan));
+      opacity: 1;
+    }
+    50% { 
+      filter: drop-shadow(0 0 30px hsl(var(--neon-cyan) / 0.8));
+      opacity: 0.8;
+    }
+  }
+
+  @keyframes scan-line {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  @keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground gradient-bg min-h-screen;
+  }
+}
+
+@layer components {
+  /* Glass morphism utilities */
+  .glass {
+    @apply bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20;
+    box-shadow: var(--shadow-glass);
+  }
+
+  .glass-hover {
+    @apply hover:bg-gradient-to-br hover:from-white/15 hover:to-white/10 transition-all duration-300;
+  }
+
+  /* Gradient backgrounds */
+  .gradient-bg {
+    background: var(--gradient-bg);
+    background-size: 400% 400%;
+    animation: gradient-shift 10s ease infinite;
+  }
+
+  .gradient-text {
+    background: var(--gradient-primary);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 200%;
+    animation: gradient-shift 3s ease infinite;
+  }
+
+  /* Glow effects */
+  .glow-cyan { filter: drop-shadow(var(--glow-cyan)); }
+  .glow-purple { filter: drop-shadow(var(--glow-purple)); }
+  .glow-success { filter: drop-shadow(var(--glow-success)); }
+  .glow-error { filter: drop-shadow(var(--glow-error)); }
+
+  /* Animations */
+  .animate-glow-pulse { animation: glow-pulse 2s ease-in-out infinite; }
+  .animate-scan { animation: scan-line 2s linear infinite; }
+  .animate-float { animation: float 3s ease-in-out infinite; }
+  .animate-spin-slow { animation: spin-slow 3s linear infinite; }
+
+  /* Upload zone styles */
+  .upload-zone {
+    @apply glass glass-hover border-dashed border-2 border-primary/30 rounded-xl p-8 transition-all duration-300;
+  }
+  
+  .upload-zone.dragging {
+    @apply border-primary border-solid glow-cyan scale-105;
+  }
+
+  /* Typography */
+  .font-futuristic {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}

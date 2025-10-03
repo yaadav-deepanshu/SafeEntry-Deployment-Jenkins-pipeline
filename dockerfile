@@ -3,12 +3,12 @@ FROM node:18-alpine AS build
 
 WORKDIR /app
 
-# Copy package files for dependency installation
-COPY package.json package-lock.json* ./
+# Copy package files from frontend/
+COPY frontend/package.json frontend/package-lock.json* ./
 RUN npm ci && npm cache clean --force
 
 # Copy source code and build
-COPY . .
+COPY frontend/ .
 RUN npm run build
 
 # Stage 2: Serve with NGINX
@@ -24,7 +24,7 @@ RUN rm -rf /usr/share/nginx/html/*
 COPY --from=build /app/dist /usr/share/nginx/html
 
 # Copy custom entrypoint script
-COPY docker/nginx-entrypoint.sh /docker-entrypoint.d/99-envsubst.sh
+COPY frontend/docker/nginx-entrypoint.sh /docker-entrypoint.d/99-envsubst.sh
 RUN chmod +x /docker-entrypoint.d/99-envsubst.sh
 
 # Add healthcheck for ECS

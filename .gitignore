@@ -1,5 +1,6 @@
-# Node.js
+# Node.js and Bun
 node_modules/
+bun.lockb
 npm-debug.log
 yarn-error.log
 /dist
@@ -52,12 +53,7 @@ logs/
 *.ori
 *.tmp
 
-# Explicitly include Terraform configuration files
+# Explicitly include key files
 !main.tf
-!variables.tf
-!outputs.tf
-!provider.tf
-
-# Explicitly include project files
 !Dockerfile
 !frontend/

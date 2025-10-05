@@ -23,7 +23,7 @@ terraform.rc
 
 # Docker
 Dockerfile.*
-*.dockerignore
+#*.dockerignore
 docker-compose.yml
 docker-compose.yaml
 

@@ -7,7 +7,7 @@ pipeline {
         IMAGE_TAG = 'latest'
         ECS_CLUSTER = 'safeentry-cluster'
         ECS_SERVICE = 'safeentry-service'
-        ALB_DNS = 'safeentry-alb-1228000383.us-east-1.elb.amazonaws.com'  // e.g., safeentry-alb-123456789.us-east-1.elb.amazonaws.com
+        ALB_DNS = 'safeentry-alb-1988418172.us-east-1.elb.amazonaws.com'  // e.g., safeentry-alb-123456789.us-east-1.elb.amazonaws.com
     }
 
     stages {

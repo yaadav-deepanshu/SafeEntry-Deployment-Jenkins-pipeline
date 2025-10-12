@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    tools {
+        nodejs 'Node18'
+    }
     environment {
         AWS_REGION = 'us-east-1'
         ECR_REPO_URL = '982081074169.dkr.ecr.us-east-1.amazonaws.com/safeentry'
@@ -63,7 +66,7 @@ pipeline {
             echo "Deployment successful! Access the app at: http://${ALB_DNS}"
         }
         failure {
-            echo "Pipeline failed. Check AWS credentials, ECR, or ECS configuration."
+            echo "Pipeline failed. Check AWS credentials, Node.js configuration, ECR, or ECS configuration."
         }
     }
 }

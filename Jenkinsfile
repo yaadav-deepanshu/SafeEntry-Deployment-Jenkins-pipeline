@@ -14,9 +14,6 @@ pipeline {
     }
     stages {
         stage('Checkout') {
-            when {
-                branch 'dev'
-            }
             steps {
                 checkout scm
             }

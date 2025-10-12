@@ -6,8 +6,7 @@ pipeline {
     environment {
         AWS_REGION = 'us-east-1'
         ECR_REPO_URL = '982081074169.dkr.ecr.us-east-1.amazonaws.com/safeentry'
-        IMAGE_TAG = "${env.BUILD_ID}"
-        LATEST_TAG = 'latest'
+        IMAGE_TAG = 'latest'
         ECS_CLUSTER = 'safeentry-cluster'
         ECS_SERVICE = 'safeentry-service'
         ALB_DNS = 'safeentry-alb-1988418172.us-east-1.elb.amazonaws.com'
@@ -38,7 +37,6 @@ pipeline {
                     script {
                         sh "aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_REPO_URL}"
                         DOCKER_IMAGE.push("${IMAGE_TAG}")
-                        DOCKER_IMAGE.push("${LATEST_TAG}")
                     }
                 }
             }
